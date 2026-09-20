@@ -12,7 +12,9 @@ import {
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutlined'
 import { Mail, MapPin, Phone } from 'lucide-react'
 import Breadcrumb from '../components/Common/Breadcrumb'
-import { submitContactForm } from '../api/contactApi'
+import { submitContactForm, subscribeNewsletter } from '../api/contactApi'
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const initialForm = {
     name: '',
@@ -22,10 +24,20 @@ const initialForm = {
     message: '',
 }
 
+const initialSubscribeForm = {
+    name: '',
+    email: '',
+}
+
+const isValidEmail = (email) => emailRegex.test(String(email ?? '').trim())
+
 export default function ContactPage({ showHeader = true }) {
     const [formData, setFormData] = useState(initialForm)
+    const [subscribeForm, setSubscribeForm] = useState(initialSubscribeForm)
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isSubscribing, setIsSubscribing] = useState(false)
     const [status, setStatus] = useState({ type: '', message: '' })
+    const [subscribeStatus, setSubscribeStatus] = useState({ type: '', message: '' })
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const handleChange = (event) => {
@@ -74,7 +86,7 @@ export default function ContactPage({ showHeader = true }) {
             return
         }
 
-        if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+        if (formData.email && !isValidEmail(formData.email)) {
             setStatus({
                 type: 'error',
                 message: 'Please enter a valid email address.',
@@ -107,6 +119,65 @@ export default function ContactPage({ showHeader = true }) {
             })
         } finally {
             setIsSubmitting(false)
+        }
+    }
+
+    const handleSubscribeChange = (event) => {
+        const { name, value } = event.target
+        setSubscribeForm((prev) => ({
+            ...prev,
+            [name]: value,
+        }))
+    }
+
+    const handleSubscribeSubmit = async (event) => {
+        event.preventDefault()
+
+        if (!subscribeForm.name.trim() || !subscribeForm.email.trim()) {
+            setSubscribeStatus({
+                type: 'error',
+                message: 'Name and email are required for subscription.',
+            })
+            return
+        }
+
+        if (subscribeForm.name.trim().length < 3) {
+            setSubscribeStatus({
+                type: 'error',
+                message: 'Name must be at least 3 characters long.',
+            })
+            return
+        }
+
+        if (!isValidEmail(subscribeForm.email)) {
+            setSubscribeStatus({
+                type: 'error',
+                message: 'Please enter a valid email address.',
+            })
+            return
+        }
+
+        try {
+            setIsSubscribing(true)
+            setSubscribeStatus({ type: '', message: '' })
+
+            await subscribeNewsletter({
+                name: subscribeForm.name,
+                email: subscribeForm.email,
+            })
+
+            setSubscribeStatus({
+                type: 'success',
+                message: 'You have been subscribed successfully.',
+            })
+            setSubscribeForm(initialSubscribeForm)
+        } catch (error) {
+            setSubscribeStatus({
+                type: 'error',
+                message: error?.response?.data?.message || 'Subscription failed. Please try again.',
+            })
+        } finally {
+            setIsSubscribing(false)
         }
     }
 
@@ -382,10 +453,37 @@ export default function ContactPage({ showHeader = true }) {
                                 </p>
                             </div>
 
-                            <form className="newsletter-form">
-                                <input type="text" name="name" placeholder="Enter your name" />
-                                <input type="email" name="email" placeholder="Enter your email" />
-                                <button type="submit" className="newsletter-btn">Subscribe</button>
+                            <form className="newsletter-form" onSubmit={handleSubscribeSubmit}>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={subscribeForm.name}
+                                    onChange={handleSubscribeChange}
+                                    placeholder="Enter your name"
+                                    required
+                                />
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={subscribeForm.email}
+                                    onChange={handleSubscribeChange}
+                                    placeholder="Enter your email"
+                                    required
+                                />
+                                <button type="submit" className="newsletter-btn" disabled={isSubscribing}>
+                                    {isSubscribing ? 'Subscribing...' : 'Subscribe'}
+                                </button>
+                                {subscribeStatus.message && (
+                                    <p
+                                        className="newsletter-note"
+                                        style={{
+                                            color: subscribeStatus.type === 'success' ? '#16a34a' : '#dc2626',
+                                            fontWeight: 500,
+                                        }}
+                                    >
+                                        {subscribeStatus.message}
+                                    </p>
+                                )}
                                 <p className="newsletter-note">No spam guaranteed, So please don’t send any spam mail.</p>
                             </form>
                         </div>
