@@ -165,10 +165,11 @@ export default function HomePage() {
                         transition={{ duration: 0.7, ease: 'easeOut' }}
                     >
                         <p className="eyebrow">Trusted by teams</p>
-                        <h2>Trusted by 100+ Businesses Worldwide</h2>
+                        {/* <h2>Trusted by 100+ Businesses Worldwide</h2> */}
+                        <h2>Trusted by 10+ Businesses Worldwide</h2>
                     </motion.div>
 
-                    <motion.div
+                    {/* <motion.div
                         className="brand-row"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -182,7 +183,7 @@ export default function HomePage() {
                         <img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Upwork_Logo.svg" alt="Upwork" />
                         <div className="brand-text">Clutch</div>
                         <div className="brand-text" style={{ color: '#2563eb' }}>GoodFirms</div>
-                    </motion.div>
+                    </motion.div> */}
                 </div>
 
 
