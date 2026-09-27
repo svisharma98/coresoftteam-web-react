@@ -69,29 +69,31 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div>
-                        <h3>Quick Links</h3>
-                        <ul className="footer-links">
-                            {quickLinks.map((item) => (
-                                <li key={item.label}>
-                                    <Link to={item.to} className="footer-link-item">
-                                        <ArrowRight size={15} />
-                                        {item.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    <div className="footer-links-group">
+                        <div>
+                            <h3>Quick Links</h3>
+                            <ul className="footer-links">
+                                {quickLinks.map((item) => (
+                                    <li key={item.label}>
+                                        <Link to={item.to} className="footer-link-item">
+                                            <ArrowRight size={15} />
+                                            {item.label}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
 
-                    <div>
-                        <h3>Services</h3>
-                        <ul className="footer-links">
-                            {services.map((service) => (
-                                <li key={service}>
-                                    <Link to="/services" className="footer-link-item">{service}</Link>
-                                </li>
-                            ))}
-                        </ul>
+                        <div>
+                            <h3>Services</h3>
+                            <ul className="footer-links">
+                                {services.map((service) => (
+                                    <li key={service}>
+                                        <Link to="/services" className="footer-link-item">{service}</Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
 
                     <div>

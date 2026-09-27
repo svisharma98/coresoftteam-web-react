@@ -10,6 +10,7 @@ import {
     Target,
     TrendingUp,
 } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Features from '../components/Features'
 import Video from '../components/Video'
@@ -35,7 +36,11 @@ export default function HomePage() {
             <section className="hero">
                 <div className="hero-bg" aria-hidden="true" />
                 <div className="container hero-inner">
-                    <div>
+                    <motion.div
+                        initial={{ opacity: 0, x: 6, y: 20 }}
+                        animate={{ opacity: 1, x: 0, y: 0 }}
+                        transition={{ duration: 1, ease: 'easeOut' }}
+                    >
                         <span className="hero-badge">Your Growth Is Our Mission</span>
                         <h1>
                             We Build <span className="highlight">Digital Solutions</span>
@@ -53,14 +58,24 @@ export default function HomePage() {
                                 Explore Services <ArrowRight size={18} style={{ verticalAlign: 'middle' }} />
                             </Link>
                         </div>
-                    </div>
+                    </motion.div>
 
-                    <div className="hero-visual">
+                    <motion.div
+                        className="hero-visual"
+                        initial={{ opacity: 0, scale: 0.8, y: 24 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ duration: 1, ease: 'easeOut' }}
+                    >
                         <img
                             src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
                             alt="Digital solutions"
                         />
-                        <div className="float-card">
+                        <motion.div
+                            className="float-card"
+                            initial={{ opacity: 0, y: 18 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5, duration: 0.7 }}
+                        >
                             <h4>Our Services</h4>
                             <ul>
                                 <li>Web Development</li>
@@ -68,50 +83,98 @@ export default function HomePage() {
                                 <li>UI/UX Design</li>
                                 <li>SEO Services</li>
                             </ul>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
                 </div>
 
-                <div className="container feature-strip">
+                <motion.div
+                    className="container feature-strip"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.8 }}
+                >
                     <div className="feature-grid">
-                        {featureList.map(({ icon: Icon, label }) => (
-                            <div key={label} className="feature-item">
+                        {featureList.map(({ icon: Icon, label }, index) => (
+                            <motion.div
+                                key={label}
+                                className="feature-item"
+                                initial={{ opacity: 0, y: 24 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.25 + index * 0.08, duration: 0.6 }}
+                            >
                                 <Icon size={22} />
                                 <span>{label}</span>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
-                </div>
+                </motion.div>
 
                 <div className="container">
-                    <div className="mission-grid">
-                        <div className="mission-card ">
+                    <motion.div
+                        className="mission-grid"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.7, ease: 'easeOut' }}
+                    >
+                        <motion.div
+                            className="mission-card"
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            transition={{ duration: 0.6, delay: 0.1 }}
+                        >
                             <Rocket size={52} color="#2563eb" />
                             <h3>Turning Ideas into Reality</h3>
                             <p>Let’s build something amazing together.</p>
-                        </div>
+                        </motion.div>
 
-                        <div className="mission-card primary">
+                        <motion.div
+                            className="mission-card primary"
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                        >
                             <Target size={52} color="#2563eb" />
                             <h3 style={{ fontSize: '1.5rem', marginTop: 18 }}>Our Mission</h3>
                             <p>
                                 To empower businesses with innovative digital solutions that drive growth,
                                 efficiency, and success.
                             </p>
-                        </div>
+                        </motion.div>
 
-                        <div className="mission-card">
+                        <motion.div
+                            className="mission-card"
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                        >
                             <TrendingUp size={52} color="#06b6d4" />
                             <h3>Your Growth Is Our Mission</h3>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
 
-                    <div className="section-title" style={{ marginTop: '52px' }}>
+                    <motion.div
+                        className="section-title"
+                        style={{ marginTop: '52px' }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.4 }}
+                        transition={{ duration: 0.7, ease: 'easeOut' }}
+                    >
                         <p className="eyebrow">Trusted by teams</p>
                         <h2>Trusted by 100+ Businesses Worldwide</h2>
-                    </div>
+                    </motion.div>
 
-                    <div className="brand-row">
+                    <motion.div
+                        className="brand-row"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.4 }}
+                        transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+                    >
                         <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" />
                         <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft"
                             style={{ width: "50px" }} />
@@ -119,7 +182,7 @@ export default function HomePage() {
                         <img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Upwork_Logo.svg" alt="Upwork" />
                         <div className="brand-text">Clutch</div>
                         <div className="brand-text" style={{ color: '#2563eb' }}>GoodFirms</div>
-                    </div>
+                    </motion.div>
                 </div>
 
 
@@ -134,8 +197,8 @@ export default function HomePage() {
 
             <Features />
             <Video />
-            <Testimonials />
-            <Pricing />
+            {/* <Testimonials /> */}
+            {/* <Pricing /> */}
             <ContactPage showHeader={false} />
         </>
     )

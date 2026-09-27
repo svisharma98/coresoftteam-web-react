@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { CheckCircle, Lightbulb, ShieldCheck, Sparkles, Users } from 'lucide-react'
 import Breadcrumb from '../components/Common/Breadcrumb'
 
@@ -61,18 +62,32 @@ export default function AboutPage({ showHeader = true }) {
                 </div>
             </section>
 
-            <section className="section" style={{ paddingTop: 0 }}>
+            <motion.section
+                className="section"
+                style={{ paddingTop: 0 }}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+            >
                 <div className="container">
                     <div className="stats-grid">
-                        {stats.map((item) => (
-                            <div className="stat-box" key={item.label}>
+                        {stats.map((item, index) => (
+                            <motion.div
+                                className="stat-box"
+                                key={item.label}
+                                initial={{ opacity: 0, y: 18, scale: 0.96 }}
+                                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                viewport={{ once: true, amount: 0.4 }}
+                                transition={{ duration: 0.45, delay: index * 0.08 }}
+                            >
                                 <h3>{item.number}</h3>
                                 <p>{item.label}</p>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
-            </section>
+            </motion.section>
 
             <section className="section about-values-section">
                 <div className="container">
