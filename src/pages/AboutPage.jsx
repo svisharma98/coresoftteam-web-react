@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion'
 import { CheckCircle, Lightbulb, ShieldCheck, Sparkles, Users } from 'lucide-react'
 import Breadcrumb from '../components/Common/Breadcrumb'
+import CountUp from '../components/CountUp'
 
 const stats = [
-    { number: '20+', label: 'Projects Completed' },
-    { number: '15+', label: 'Happy Clients' },
-    { number: '7+', label: 'Years of Experience' },
-    { number: '24/7', label: 'Support Available' },
+    { value: 20, number: '20+', label: 'Projects Completed' },
+    { value: 15, number: '15+', label: 'Happy Clients' },
+    { value: 7, number: '7+', label: 'Years of Experience' },
+    { value: 0, number: '24/7', label: 'Support Available' },
 ]
 
 const values = [
@@ -81,7 +82,9 @@ export default function AboutPage({ showHeader = true }) {
                                 viewport={{ once: true, amount: 0.4 }}
                                 transition={{ duration: 0.45, delay: index * 0.08 }}
                             >
-                                <h3>{item.number}</h3>
+                                <h3>
+                                    {item.value ? <CountUp value={item.value} /> : <span>{item.number}</span>}
+                                </h3>
                                 <p>{item.label}</p>
                             </motion.div>
                         ))}

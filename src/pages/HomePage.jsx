@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import CountUp from '../components/CountUp'
 import Features from '../components/Features'
 import Video from '../components/Video'
 import Testimonials from '../components/Testimonials'
@@ -43,7 +44,45 @@ export default function HomePage() {
                     >
                         <span className="hero-badge">Your Growth Is Our Mission</span>
                         <h1>
-                            We Build <span className="highlight">Digital Solutions</span>
+                            We Build{' '}
+                            <motion.span
+                                className="highlight"
+                                variants={{
+                                    hidden: {},
+                                    visible: { transition: { staggerChildren: 0.16 } },
+                                }}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.8 }}
+                            >
+                                {['Digital', 'Solutions'].map((word) => (
+                                    <motion.span
+                                        key={word}
+                                        style={{
+                                            backgroundImage: 'linear-gradient(90deg, var(--primary-dark) 0%, var(--primary) 35%, #2382f6 65%, var(--primary) 100%)',
+                                            backgroundSize: '200% 100%',
+                                            backgroundPosition: '100% 0',
+                                            WebkitBackgroundClip: 'text',
+                                            WebkitTextFillColor: 'transparent',
+                                        }}
+                                        whileHover={{
+                                            backgroundPosition: '0% 0',
+                                            transition: { duration: 0.7, ease: 'easeInOut' },
+                                        }}
+                                        variants={{
+                                            hidden: { opacity: 0, y: 18, filter: 'blur(6px)' },
+                                            visible: {
+                                                opacity: 1,
+                                                y: 0,
+                                                filter: 'blur(0px)',
+                                                transition: { duration: 0.65, ease: 'easeOut' },
+                                            },
+                                        }}
+                                    >
+                                        {word}
+                                    </motion.span>
+                                )).reduce((parts, word, index) => (index ? [...parts, ' ', word] : [word]), [])}
+                            </motion.span>
                             <br />
                             That Grow Your Business
                         </h1>
@@ -166,7 +205,7 @@ export default function HomePage() {
                     >
                         <p className="eyebrow">Trusted by teams</p>
                         {/* <h2>Trusted by 100+ Businesses Worldwide</h2> */}
-                        <h2>Trusted by 10+ Businesses Worldwide</h2>
+                        <h2>Trusted by <CountUp value={15} /> Businesses Worldwide</h2>
                     </motion.div>
 
                     {/* <motion.div

@@ -112,7 +112,7 @@ p {
 }
 
 .section {
-  padding: 50px 0;
+  padding: 40px 0;
 }
 
 .section-title {
@@ -1130,7 +1130,7 @@ p {
 .breadcrumb-visual {
   position: absolute;
   inset: 0;
-  opacity: 0.1;
+  opacity: 0.24;
   color: var(--primary);
 }
 
@@ -1141,6 +1141,18 @@ p {
   width: 100%;
   height: 100%;
   display: block;
+}
+
+.page-header-wave-back {
+  opacity: 0.22;
+}
+
+.page-header-wave-middle {
+  opacity: 0.32;
+}
+
+.page-header-wave-front {
+  opacity: 0.58;
 }
 
 .page-header-bread-glow,
@@ -2507,7 +2519,7 @@ p {
     gap: 18px;
   }
 
-ƒ  .footer-links-group {
+  ƒ .footer-links-group {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px 16px;
@@ -2686,10 +2698,6 @@ p {
   .menu-toggle {
     width: 38px;
     height: 38px;
-  }
-
-  .section {
-    padding: 72px 0;
   }
 
   .hero-badge {

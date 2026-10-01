@@ -3,7 +3,7 @@ export default function Breadcrumb({ pageName, description }) {
         <section className="breadcrumb-shell">
             <section className="breadcrumb-inner">
                 <div className="breadcrumb-visual" aria-hidden="true">
-                    <svg
+                    {/* <svg
                         className="absolute bottom-0 w-full h-full text-blue-200 dark:text-slate-800"
                         viewBox="0 0 1440 320"
                         preserveAspectRatio="none"
@@ -12,6 +12,33 @@ export default function Breadcrumb({ pageName, description }) {
                             fill="currentColor"
                             d="M0,224L60,213.3C120,203,240,181,360,176C480,171,600,181,720,192C840,203,960,213,1080,192C1200,171,1320,117,1380,90.7L1440,64L1440,320L0,320Z"
                         />
+                    </svg> */}
+
+                    <svg
+                        className="page-header-bread-wave"
+                        viewBox="0 0 1440 320"
+                        preserveAspectRatio="none"
+                    >
+                        <g>
+                            <animateTransform
+                                attributeName="transform"
+                                type="translate"
+                                from="0 0"
+                                to="-1440 0"
+                                dur="15s"
+                                repeatCount="indefinite"
+                                calcMode="linear"
+                            />
+                            <path
+                                fill="currentColor"
+                                d="M0,188C240,108 480,108 720,188C960,268 1200,268 1440,188L1440,320L0,320Z"
+                            />
+                            <path
+                                fill="currentColor"
+                                transform="translate(1440 0)"
+                                d="M0,188C240,108 480,108 720,188C960,268 1200,268 1440,188L1440,320L0,320Z"
+                            />
+                        </g>
                     </svg>
 
                 </div>
